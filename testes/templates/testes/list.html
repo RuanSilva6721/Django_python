@@ -5,5 +5,11 @@
 <h1>Lista Teste</h1>
 
 {% for Teste in testes %}
-    
+    <li>
+        <span><a href="/Teste/{{Teste.id}}">{{Teste.title}} </a></span>
+        <span><i class="fas fa-trash"></i></span>
+        <span><i class="fas fa-edit"></i></span>
+    </li>
+{% endfor %}        
+
 {% endblock %}
