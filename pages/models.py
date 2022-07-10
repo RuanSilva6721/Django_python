@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Cliente(models.Model):
-    codCliente = models.AutoField(primary_key=True, serialize=True)
+    codCliente = models.AutoField(primary_key=True)
     cpf = models.CharField(max_length=11, unique=True)
     nomeCliente = models.CharField(max_length=100)
     renda = models.DecimalField(max_digits=10, decimal_places=2)
@@ -21,7 +21,7 @@ class Venda(models.Model):
         return self.codVenda
 
 class Produto(models.Model):
-    codProduto = models.AutoField(primary_key=True, serialize=True)
+    codProduto = models.AutoField(primary_key=True)
     descricao = models.CharField(max_length=100)
     valorUnitario = models.DecimalField(max_digits=10, decimal_places=2)
     unidade = models.CharField(max_length=10)
