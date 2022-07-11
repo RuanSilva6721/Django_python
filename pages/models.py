@@ -21,13 +21,14 @@ class Venda(models.Model):
         return self.codVenda
 
 class Produto(models.Model):
-    codProduto = models.AutoField(primary_key=True)
-    descricao = models.CharField(max_length=100)
-    valorUnitario = models.DecimalField(max_digits=10, decimal_places=2)
-    unidade = models.CharField(max_length=10)
-    estoqueMinimo = models.IntegerField()
-    qtdEstoque = models.IntegerField()
-
+    codProduto = models.AutoField('Código do Produto', primary_key=True)
+    descricao = models.CharField('Descrição', max_length=100)
+    valorUnitario = models.DecimalField("Valor Unitário", max_digits=10, decimal_places=2)
+    unidade = models.CharField('Unidade', max_length=10)
+    estoqueMinimo = models.IntegerField('Estoque Minimo')
+    qtdEstoque = models.IntegerField('Quantidade em estoque')
+    imgProduto = models.ImageField('Imagem', upload_to='produtos/')
+    
     def __str__(self):
         return self.descricao
 
