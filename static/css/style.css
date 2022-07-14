@@ -52,4 +52,10 @@ header, .navbar{
     padding-right: 280px;
     margin-left: 300px;
 }
+footer{
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+}
 
