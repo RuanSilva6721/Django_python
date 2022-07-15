@@ -14,10 +14,10 @@
                     {% for produtos in produto %}
                     <div class="col-md-3">
                         <div class="card">
-                            <img src="{{produtos.imgProduto}} " class="card-img-top" alt="">
+                            <img src="{{produtos.imgProduto.url}} " class="card-img-top" alt="">
                             <div>
                                 <h5 class="card-title">{{produtos.descricao}}</h5>
-                                <p>descrição</p>
+                                <p>{{produtos.valorUnitario}}</p>
                             </div>
                         </div>
                     </div>
