@@ -49,10 +49,8 @@ header, .navbar{
     margin-right: 20px;
 }
 #barra_de_pesquisa{
-
     margin-left: 300px;
-    width: 500px;
-    
+    width: 500px; 
 }
 footer{
     bottom: 0;
@@ -85,5 +83,20 @@ header{
 }*/
 .card{
     margin-top: 20px;
-}
+    box-shadow: -10px 10px 15px rgb(0, 0, 0, .4);
+    transform: scale(1);
+    transition: all 300ms ease-in-out;
 
+    
+}
+.card:hover{
+    transform: scale(1.2);
+}
+#nome_do_produto{
+    color: #0A0030;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+}
+#preco_do_produto{
+    text-align: center;
+}
