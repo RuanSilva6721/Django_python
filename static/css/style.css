@@ -77,3 +77,10 @@ footer{
 header{
     margin-bottom: 180px
 }*/
+.card{
+    display: inline-block;
+    margin: 60px;
+    width: 300px;
+    height: 300px;
+}
+

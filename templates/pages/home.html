@@ -4,13 +4,14 @@
 {% block content %}
 
 
-{% for produtos in produto %}
+
 
     <div class="produtos-card">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <h2 class="main-title">Produtos</h2></div>
+                    {% for produtos in produto %}
                     <div class="col-md-3">
                         <div class="card">
                             <img src="{{produtos.imgProduto}} " class="card-img-top" alt="">
@@ -20,31 +21,13 @@
                             </div>
                         </div>
                     </div>
-                        <div class="col-md-3">
-                        <div class="card">
-                            <img src="{{produtos.imgProduto}} " class="card-img-top" alt="">
-                            <div>
-                                <h5 class="card-title">{{produtos.descricao}}</h5>
-                                <p>descrição</p>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="col-md-3">
-                        <div class="card">
-                            <img src="{{produtos.imgProduto}} " class="card-img-top" alt="">
-                            <div>
-                                <h2>{{produtos.imgProduto}}</h2>
-                                <h5 class="card-title">{{produtos.descricao}}</h5>
-                                <p>descrição</p>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}  
             </div>
         </div>
     </div>
 
 
-{% endfor %}        
+      
 
 {% endblock %}
 
