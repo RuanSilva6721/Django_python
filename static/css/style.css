@@ -49,13 +49,31 @@ header, .navbar{
     margin-right: 20px;
 }
 #barra_de_pesquisa{
-    padding-right: 280px;
+
     margin-left: 300px;
+    width: 500px;
+    
 }
 footer{
     bottom: 0;
-    position: fixed;
+    position: relative;
     width: 100%;
     text-align: center;
 }
+/* .main-content{
+    background: blue;
+    padding-top: 0;
+}
+.main-content-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: var(--spacing-gutter-large);
+}
 
+.temp{
+    height: 20rem;
+    background: red;
+} 
+header{
+    margin-bottom: 180px
+}*/
