@@ -83,6 +83,7 @@ header{
 }*/
 .card{
     margin-top: 20px;
+    margin-bottom: 40px;
     box-shadow: -10px 10px 15px rgb(0, 0, 0, .4);
     transform: scale(1);
     transition: all 300ms ease-in-out;
