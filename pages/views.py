@@ -7,8 +7,9 @@ def home_home(request):
     produto = Produto.objects.all()
     return render(request, 'pages/home.html', {'produto': produto})
 
-def comprar_produto(request, produto):
-    return render(request, 'pages/produto.html', {'produto':produto})
-
-# def comprar_produto(request, produto_description):
-#     return render(request, 'pages/produto.html')
+def comprar_produto(request, name):
+    produto = Produto.objects.all()
+    for produtos in produto:
+        if (produtos.descricao == name):
+            return render(request, 'pages/produto.html',  {'name': 'erro', 'produtos': produtos}) 
+            

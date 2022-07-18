@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
-{% block title %}  {% endblock %}
+{% block title %} {{produtos.descricao}} {% endblock %}
 
 {% block content %}
 
 
+<div class="produtos-card">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="{{produtos.imgProduto.url}}" class="card-img-top" alt="">
+                        <div>
+                            <h5 class="card-title" id="nome_do_produto">{{produtos.descricao}}</h5>
+                            <p id="preco_do_produto">{{produtos.valorUnitario}}</p>
+                        </div>
+                    </div>
+                </div>
+ 
+        </div>
+    </div>
+</div>
+</div>
 {% endblock %}

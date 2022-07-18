@@ -14,7 +14,7 @@
                     {% for produtos in produto %}
                     <div class="col-md-3">
                         <div class="card">
-                            <a href="{% url 'produto' %}"><img src="{{produtos.imgProduto.url}}" class="card-img-top" alt=""></a>
+                            <a href="{% url 'produto' name=produtos.descricao %}"><img src="{{produtos.imgProduto.url}}" class="card-img-top" alt=""></a>
                             <div>
                                 <h5 class="card-title" id="nome_do_produto">{{produtos.descricao}}</h5>
                                 <p id="preco_do_produto">{{produtos.valorUnitario}}</p>
@@ -25,6 +25,7 @@
             </div>
         </div>
     </div>
+</div>
 
 
       
