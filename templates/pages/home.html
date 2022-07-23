@@ -4,16 +4,33 @@
 {% block content %}
 
 
-{% for produtos in produto %}
-    <li>
-        <h2>hghjhghhhgh</h2>
-        <span><a href="#">{{produtos.descricao}} </a></span>
 
-        
 
-        <h1>desdsdsds</h1>
-    </li>
-{% endfor %}        
+    <div class="produtos-card">
+        <div class="container">
+            <div class="row">
+                <a href="{% url 'newUser' %}"> Cadastrar Usuários</a>
+                <div class="col-12">
+                    <h2 class="main-title">Produtos</h2>
+                    </div>
+                    {% for produtos in produto %}
+                    <div class="col-md-3">
+                        <div class="card">
+                            <a href="{% url 'produto' name=produtos.descricao cod=produtos.codProduto %}"><img src="{{produtos.imgProduto.url}}" class="card-img-top" alt=""></a>
+                            <div>
+                                <h5 class="card-title" id="nome_do_produto">{{produtos.descricao}}</h5>
+                                <p id="preco_do_produto">{{produtos.valorUnitario}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}  
+            </div>
+        </div>
+    </div>
+</div>
+
+
+      
 
 {% endblock %}
 

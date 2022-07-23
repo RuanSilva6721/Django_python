@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} {{produtos.descricao}} {% endblock %}
+
+{% block content %}
+
+<form action="new/" method="POST">
+    {% csrf_token %}
+<div class="produtos-card">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="col-md-3">
+                    <div class="card-destalhe">
+                        <img src="{{produtos.imgProduto.url}}" class="card-img-top" alt="">
+                        <div>
+                            <h5 class="card-title" id="nome_do_produto">{{produtos.descricao}}</h5>
+                            <p id="preco_do_produto">{{produtos.valorUnitario}}</p>
+                        </div>
+                    </div>
+                </div>
+ 
+        </div>
+    </div>
+</div>
+</div>
+
+<input type="submit" value="Comprar">
+</form> 
+
+{% endblock %}
