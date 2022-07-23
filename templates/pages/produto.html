@@ -2,9 +2,6 @@
 {% block title %} {{produtos.descricao}} {% endblock %}
 
 {% block content %}
-
-<form action="new/" method="POST">
-    {% csrf_token %}
 <div class="produtos-card">
     <div class="container">
         <div class="row">
@@ -23,8 +20,21 @@
     </div>
 </div>
 </div>
-
-<input type="submit" value="Comprar">
 </form> 
+<div class="container">
+    <div class="offset-1 col-10 list-div">
+        <h1>Adicionar Usuário</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <h3>Estoque atual do produto é : {{produtos.qtdEstoque}}</h3>
+            <input type="submit" class="btn btn-success" value="Comprar" >
+        </form>
+    
+    
+    
+    
+    </div>
+    </div>
 
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-#from pages.forms import ProdutoForm
+from pages.forms import ClienteForm
 from pages.models import Produto, Cliente, Venda, DetalheVenda
-from .forms import ClienteForm
+
 
 def home_home(request):
     produto = Produto.objects.all()
@@ -10,17 +10,14 @@ def home_home(request):
 
 def produtoDescrip(request, name, cod):
     produtos = get_object_or_404 (Produto, pk=cod)
-    return render (request, 'pages/produto.html', {'produtos': produtos} )
-            
-
-def salvaDadosProd(request,):
-    # produto = ProdutoForm(request.POST)
-    produto = Produto.objects.all()
     if request.method == 'POST':
-
-        #  produto.save()
-         return redirect('')
-
+         produtos.qtdEstoque = produtos.qtdEstoque - 1
+         produtos.save()           
+         #return redirect('/')
+         return render (request, 'pages/produto.html', {'produtos': produtos} )
+    else:
+        return render (request, 'pages/produto.html', {'produtos': produtos} )
+            
 
 def newUser(request):
     if request.method == 'POST':
