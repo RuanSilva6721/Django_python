@@ -27,3 +27,7 @@ def new_user(request):
     else:        
         form = ClienteForm()
         return render(request, 'pages/cadastrar_user.html', {'form': form})
+
+
+def login(request):
+    return render(request, 'pages/login.html')
