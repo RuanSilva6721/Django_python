@@ -1,0 +1,5 @@
+<ul>
+    {% for key, value in form.errors.items %}
+        <li class="mb-4 mt-4 text-center text-red-500 text-base ">{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
+    {% endfor %}
+</ul>
