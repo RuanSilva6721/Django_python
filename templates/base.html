@@ -29,8 +29,14 @@
               
               <div id="navbar-links">
                 <div class="navbar-nav">
-                  <a class="nav-item nav-link" id="home-menu" href="{% url 'home' %}">Home</span></a>
-                  <a class="nav-item nav-link" id="persona-menu" href="{% url 'user-login' %}"><i class="fa-solid fa-user"></i></a>
+                  <a class="nav-item nav-link" id="home-menu" href="{% url 'home' %}">Home</a>
+                  {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" id="persona-menu" href="#"><i class="fa-solid fa-user"></i></a>
+                    <a class="nav-item nav-link" id="sair-menu" href="{% url 'logout' %}">Sair</a>
+                  {% else %}
+                    <a class="nav-item nav-link" id="entrar-menu" href="{% url 'login' %}">Entrar</a>
+                    <a class="nav-item nav-link" id="cadastrar-menu" href="{% url 'cadastrar' %}">Cadastre-se</a>
+                  {% endif %}
                   <a class="nav-item nav-link" id="carrinho-compra" href="#"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
               </div>

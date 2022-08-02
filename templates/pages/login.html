@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Cadastro{% endblock %}
+{% block title %} Login {% endblock %}
 
 {% block content %}
 
 <div class="grid place-items-center h-screen">
     <div class="w-full max-w-sm ">
       <h1 class="text-2xl text-center text-gray-800">Entrar</h1>
-        {% include 'error_login.html' %}
-        <form  method="POST" action="" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        {% if msg %}]
+        {{ msg }}
+        {% endif %}
+        <form  method="POST" action="/login/" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             {% csrf_token %}
             <div class="mb-4">
-              {% for field in form %}
-                      <div class="mb-4">
-                          <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ field.auto_id }}">
-                              {{ field.label }}
-                          </label>
-                          {{ field }}
-                      </div>                  
-              {% endfor %}
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ field.auto_id }}">
+                      Email
+                    </label>
+                    <input type="email" name="email" placeholder="Email">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ field.auto_id }}">
+                      Senha
+                  </label>
+                  <input type="password" name="password" placeholder="Senha">
+                </div>
             </div>
             {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
