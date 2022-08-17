@@ -12,6 +12,7 @@ class Cliente(models.Model):
     renda = models.DecimalField(max_digits=10, decimal_places=2)
     classeSocial = models.CharField(max_length=1)
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, null=True)
+
     def __str__(self):
         return self.nomeCliente
 
@@ -26,6 +27,7 @@ class Venda(models.Model):
 class Produto(models.Model):
     codProduto = models.AutoField('Código do Produto', primary_key=True)
     descricao = models.CharField('Descrição', max_length=100)
+    infProduto = models.TextField('Informações do Produto', blank=True)
     valorUnitario = models.DecimalField("Valor Unitário", max_digits=10, decimal_places=2)
     unidade = models.CharField('Unidade', max_length=10)
     estoqueMinimo = models.IntegerField('Estoque Minimo')
