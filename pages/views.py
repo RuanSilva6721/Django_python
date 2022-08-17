@@ -32,7 +32,7 @@ def user_login(request):
             return render(request, 'pages/login.html', {'msg': 'Usuário ou senha incorretos'})
     else:
         return render(request, 'pages/login.html')
-
+#
 def cadastrar(request):
     if request.method == 'POST':
         try:
