@@ -2,39 +2,23 @@
 {% block title %} {{produtos.descricao}} {% endblock %}
 
 {% block content %}
-<div class="produtos-card">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="col-md-3">
-                    <div class="card-destalhe">
-                        <img src="{{produtos.imgProduto.url}}" class="card-img-top" alt="">
-                        <div>
-                            <h5 class="card-title" id="nome_do_produto">{{produtos.descricao}}</h5>
-                            <p id="preco_do_produto">{{produtos.valorUnitario}}</p>
-                        </div>
-                    </div>
-                </div>
- 
-        </div>
-    </div>
-</div>
-</div>
-</form> 
 <div class="container">
-    <div class="offset-1 col-10 list-div">
-        <h1>Adicionar Usuário</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p}}
-            <h3>Estoque atual do produto é : {{produtos.qtdEstoque}}</h3>
-            <input type="submit" class="btn btn-success" value="Comprar" >
-        </form>
-    
-    
-    
-    
-    </div>
-    </div>
+<div class="floatproduto">
+
+                    <img src="{{produtos.imgProduto.url}}" class="card-img-top Infoproduto" alt="">   
+                                     
+                            <h1 class="card-title" id="nome_do_produto">{{produtos.descricao}}</h1>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit voluptatem vel ullam dolor provident minus nam illum exercitationem sed, corporis iusto molestiae qui dolores perspiciatis, excepturi ut voluptate ad vero?</p>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <h3>Estoque atual do produto é : {{produtos.qtdEstoque}}</h3>
+                                <input type="submit" class="btn btn-success" value="Comprar" >
+                            </form>
+                      
+</div>
+</div>
+
+
+
 
 {% endblock %}
