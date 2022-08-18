@@ -15,10 +15,6 @@ body {
     font-family: sans-serif;
 }
 
-h1 {
-    color: blueviolet;
-}
-
 .row {
     margin: 0;
 }
@@ -67,7 +63,7 @@ header,
 }
 
 #search {
-    position: relative;
+    position: absolute;
     display: flex;
 }
 
@@ -133,7 +129,7 @@ header,
 /* Footer */
 
 footer {
-    position: absolute;
+    position: initial;
     bottom: 0;
     left: 0;
     right: 0;
@@ -148,4 +144,29 @@ footer {
 
 .signUp a {
     color: #4299e1;
+}
+
+.Infoproduto{
+    height: 400px;
+    width: 400px;
+    margin-right: 50px;
+    margin-top: 0;
+    margin-bottom: 80px;
+
+}
+
+.h1_form_info_descri{
+    float: left;
+}
+.h1_form_info_descri-comp{
+    padding-top: 15px;
+}
+.h1_form_info_descri-comp form{
+    padding-top: 20px;
+}
+.container{
+    margin-bottom: 50px;
+}
+.h1_form_info_descri-comp-preco{
+font-size: 35px;
 }
