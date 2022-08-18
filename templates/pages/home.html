@@ -2,10 +2,6 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-
-
-
-
     <div class="produtos-card">
         <div class="container">
             <div class="row">
@@ -17,11 +13,14 @@
                     <div class="col-md-3">
                         <div class="card" style="width: 18rem">
                             <a href="{% url 'produto' name=produtos.descricao cod=produtos.codProduto %}">
-                                <img src="{{produtos.imgProduto.url}}" class="card-img-top img-produto" alt=""></a>
-                            <div class="card-body">
-                                <h2 class="card-title" id="nome-produto">{{produtos.descricao}}</h2>
-                                <p class="card-text" id="preco-produto">R${{produtos.valorUnitario}}</p>
-                            </div>
+                                <div style="width:224px; height:224px; margin: auto">
+                                    <img src="{{produtos.imgProduto.url}}" class="card-img-top img-produto" alt="">
+                                </div>
+                                <div class="card-body">
+                                    <h2 class="card-title nome-produto">{{produtos.descricao}}</h2>
+                                    <p class="card-text preco-produto">R${{produtos.valorUnitario}}</p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     {% endfor %}  
@@ -29,11 +28,9 @@
         </div>
     </div>
 </div>
-
+{% endblock %}
 
       
-
-{% endblock %}
 
 
 

@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+a, a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
 body {
     background-color: aliceblue;
     font-family: sans-serif;
@@ -107,20 +112,24 @@ header,
 }
 
 .card:hover {
-    /* transform: scale(1.2); */
+    transform: scale(1.2);
 }
 
-#nome-produto {
+.nome-produto {
     /* color: #0a0030;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center; */
     font-size: 26px;
 }
 
-#preco-produto {
+.preco-produto {
     font-size: 24px;
 }
 
+.img-produto {
+    width: 100%;
+    height: 100%;
+}
 /* Footer */
 
 footer {
