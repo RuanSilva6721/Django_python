@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base-sign.html' %}
 {% load static %}
 {% block title %} Login {% endblock %}
 
@@ -17,11 +17,13 @@
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ field.auto_id }}">
                       Email
                     </label>
-                    <input type="email" name="email" placeholder="Email">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ field.auto_id }}">
-                      Senha
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" name="email">
+                </div>
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ field.auto_id }}">
+                    Senha
                   </label>
-                  <input type="password" name="password" placeholder="Senha">
+                  <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" type="password" name="password">
                 </div>
             </div>
             {% if redirect_field_value %}
