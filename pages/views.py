@@ -5,8 +5,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 
+from utils.util import desacentua
+from django.db.models import Q
+
+
 def home(request):
-    produto = Produto.objects.all()
+    search = request.GET.get('search')
+    if search:
+        search2 = desacentua(search)
+        produto = Produto.objects.filter(Q(descricao__icontains=search) | Q(descricao__icontains=search2) | Q(infProduto__icontains=search))
+    else:
+        produto = Produto.objects.all()
     return render(request, 'pages/home.html', {'produto': produto})
 
 

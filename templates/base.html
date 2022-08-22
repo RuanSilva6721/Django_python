@@ -22,9 +22,11 @@
                 <img id="logo" src="{% static 'img/icons8-bbb-48.png' %}" alt="hDC Agency">
                 <span>RFCR</span>
               </a>
-              <div id="search">
-                  <input class="form-control me-3" placeholder="Pesquisar" aria-label="Search" id="barra-pesquisa">
-                  <button class="btn btn-outline-success"><i class="fa-solid fa-magnifying-glass"></i></button>
+              <div >
+                <form method="get" id="search" action="/">
+                  <input class="form-control me-3" name="search" placeholder="Pesquisar" aria-label="Search" id="barra-pesquisa">
+                  <button  type="submit" class="btn btn-outline-success"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
               </div>
               
               <div id="navbar-links">
