@@ -5,14 +5,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 
-
 def home(request):
     produto = Produto.objects.all()
     return render(request, 'pages/home.html', {'produto': produto})
 
+
 def produto_description(request, name, cod):
-    produtos = get_object_or_404 (Produto, pk=cod)
-    if request.method == 'POST':
+    produtos = get_object_or_404(Produto, pk=cod)
+    if request.method == 'POST' and request.user.is_authenticated:
          produtos.qtdEstoque = produtos.qtdEstoque - 1
          produtos.save()
          return render (request, 'pages/produto.html', {'produtos': produtos} )
@@ -22,14 +22,19 @@ def produto_description(request, name, cod):
 
 def user_login(request):
     if request.method == 'POST':
+        try:
+            next = request.POST['next']
+        except:
+            next = '/'
         username = request.POST['email']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/')
+            return redirect(next)
         else:
-            return render(request, 'pages/login.html', {'msg': 'Usuário ou senha incorretos'})
+            messages.error(request, 'Usuário ou senha inválidos')
+            return redirect(next)
     else:
         return render(request, 'pages/login.html')
 #

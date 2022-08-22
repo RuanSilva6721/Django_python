@@ -4,20 +4,20 @@
 {% block content %}
     <div class="container">
 
-                    <img src="{{produtos.imgProduto.url}}" class="card-img-top Infoproduto h1_form_info_descri" alt="">   
-                                     
-                    <strong><h1 class="card-title h1_form_info_descri-comp" id="nome_do_produto">{{produtos.descricao}}</h1></strong>
-                            <p class="h1_form_info_descri-comp">{{produtos.infProduto}}</p>
-                           <strong> <h4 class="h1_form_info_descri-comp-preco"></p>R${{produtos.valorUnitario}}</h4></strong>
-                            <form method="POST" class="h1_form_info_descri-comp">
-                                {% csrf_token %}
-                                <!-- <h3>Estoque atual do produto é : {{produtos.qtdEstoque}}</h3> -->
-                                <input type="submit" class="btn btn-success" value="Comprar" onclick="comprarProduto()">
-                            </form>
+        <img src="{{produtos.imgProduto.url}}" class="card-img-top Infoproduto h1_form_info_descri" alt="">   
+                            
+        <h1 class="card-title h1_form_info_descri-comp" id="nome_do_produto">{{produtos.descricao}}</h1>
+        <p class="h1_form_info_descri-comp">{{produtos.infProduto}}</p>
+        <h4 class="h1_form_info_descri-comp-preco"></p>R${{produtos.valorUnitario}}</h4>
+        {% if user.is_authenticated %}
+            <form method="POST" class="h1_form_info_descri-comp">
+                {% csrf_token %}
+                <!-- <h3>Estoque atual do produto é : {{produtos.qtdEstoque}}</h3> -->
+                <input type="submit" class="btn btn-success" value="Comprar" onclick="comprarProduto()">
+            </form>
+        {% else %}
+            <a href="/login/?next={{request.path}}" class="btn btn-success">Comprar</a>
+        {% endif %}
  
     </div>
-
-
-
-
 {% endblock %}
