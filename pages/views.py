@@ -11,7 +11,7 @@ def home(request):
 
 
 def produto_description(request, name, cod):
-    produtos = get_object_or_404(Produto, pk=cod)
+    produtos = get_object_or_404(Produto, pk=cod, descricao=name)
     if request.method == 'POST' and request.user.is_authenticated:
          produtos.qtdEstoque = produtos.qtdEstoque - 1
          produtos.save()
