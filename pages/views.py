@@ -34,7 +34,7 @@ def user_login(request):
             return redirect(next)
         else:
             messages.error(request, 'Usuário ou senha inválidos')
-            return redirect(next)
+            return redirect(request.path + '?next=' + next)
     else:
         return render(request, 'pages/login.html')
 #
