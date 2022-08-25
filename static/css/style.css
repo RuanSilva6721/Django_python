@@ -42,7 +42,7 @@ header,
 #nav-container {
     padding-top: 0;
     padding-bottom: 0;
-    margin-bottom: 70px;
+    margin-bottom: 140px;
 }
 
 #logo {
@@ -125,27 +125,10 @@ header,
     width: 100%;
     height: 100%;
 }
-/* Footer */
 
-footer {
-    position: initial;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
+/* Detalhe produto */
 
-/* Page Login */
-.signUp {
-    margin-top: 18px;
-    margin-bottom: -20px;
-    color: #4a5568;
-}
-
-.signUp a {
-    color: #4299e1;
-}
-
-.Infoproduto{
+.info-produto{
     height: 400px;
     width: 400px;
     margin-right: 50px;
@@ -154,19 +137,29 @@ footer {
 
 }
 
-.h1_form_info_descri{
-    float: left;
+.container-compra{
+    display: flex;
+    justify-content: center;
+    gap: 37px;
 }
-.h1_form_info_descri-comp{
-    padding-top: 15px;
-    margin-bottom: 40px;
+
+.compra-descricao{
+    padding-top: 8px;
 }
-.h1_form_info_descri-comp form{
+
+.compra-descricao form{
     padding-top: 20px;
 }
-.container{
-    margin-bottom: 50px;
+
+.compra-preco, h4.compra-preco{
+    font-size: 35px;
 }
-.h1_form_info_descri-comp-preco{
-font-size: 35px;
+
+/* Footer */
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

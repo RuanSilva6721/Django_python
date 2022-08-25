@@ -1,5 +1,5 @@
 from django.contrib import messages
-from pages.models import Produto, Cliente
+from pages.models import DetalheVenda, Produto, Cliente, Venda
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -22,9 +22,15 @@ def home(request):
 def produto_description(request, name, cod):
     produtos = get_object_or_404(Produto, pk=cod, descricao=name)
     if request.method == 'POST' and request.user.is_authenticated:
-         produtos.qtdEstoque = produtos.qtdEstoque - 1
-         produtos.save()
-         return render (request, 'pages/produto.html', {'produtos': produtos} )
+        qtd_select = int(request.POST['qtd'])
+        cliente = Cliente.objects.get(user=request.user.id)
+        if produtos.qtdEstoque > 0 and qtd_select <= produtos.qtdEstoque:
+            produtos.qtdEstoque -= qtd_select
+            produtos.save()
+            codVenda = Venda.objects.create(codCliente=cliente).codVenda
+            
+            DetalheVenda.objects.create(codDetalheVenda=Venda.objects.get(codVenda=codVenda), codProduto=produtos, qtdProduto=qtd_select)
+        return render (request, 'pages/produto.html', {'produtos': produtos} )
     else:
         return render (request, 'pages/produto.html', {'produtos': produtos} )
 

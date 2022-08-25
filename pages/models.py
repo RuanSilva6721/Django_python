@@ -16,14 +16,6 @@ class Cliente(models.Model):
     def __str__(self):
         return self.nomeCliente
 
-class Venda(models.Model):
-    codVenda = models.AutoField(primary_key=True)
-    codCliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    dataVenda = models.DateField(auto_now=True)
-
-    def __str__(self):
-        return self.codVenda
-
 class Produto(models.Model):
     codProduto = models.AutoField('Código do Produto', primary_key=True)
     descricao = models.CharField('Descrição', max_length=100)
@@ -37,10 +29,17 @@ class Produto(models.Model):
     def __str__(self):
         return self.descricao
 
+class Venda(models.Model):
+    codVenda = models.AutoField(primary_key=True)
+    codCliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    dataVenda = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.codCliente.nomeCliente + ' - ' + self.dataVenda.strftime('%d/%m/%Y')
+
+
 class DetalheVenda(models.Model):
-    codVenda = models.ForeignKey(Venda, on_delete=models.CASCADE)
+    codDetalheVenda = models.ForeignKey(Venda, on_delete=models.CASCADE)
     codProduto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     qtdProduto = models.IntegerField()
 
-    def __str__(self):
-        return self.codDetalheVenda

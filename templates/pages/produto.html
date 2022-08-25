@@ -2,22 +2,33 @@
 {% block title %} {{produtos.descricao}} {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container-compra">
 
-        <img src="{{produtos.imgProduto.url}}" class="card-img-top Infoproduto h1_form_info_descri" alt="">   
+        <img src="{{produtos.imgProduto.url}}" class="card-img-top info-produto" alt="">   
                             
-        <h1 class="card-title h1_form_info_descri-comp" id="nome_do_produto">{{produtos.descricao}}</h1>
-        <p class="h1_form_info_descri-comp">{{produtos.infProduto}}</p>
-        <h4 class="h1_form_info_descri-comp-preco"></p>R${{produtos.valorUnitario}}</h4>
-        {% if user.is_authenticated %}
-            <form method="POST" class="h1_form_info_descri-comp">
+        <div style="width: 600px">
+            <form method="POST" class="compra-descricao">
                 {% csrf_token %}
-                <!-- <h3>Estoque atual do produto é : {{produtos.qtdEstoque}}</h3> -->
-                <input type="submit" class="btn btn-success" value="Comprar" onclick="comprarProduto()">
+            <h1 class="card-title compra-descricao">{{produtos.descricao}}</h1>
+            <h4 class="compra-preco"></p>R${{produtos.valorUnitario}}</h4>
+            <p class="compra-descricao">{{produtos.infProduto}}</p>
+            <div style="display: flex; align-items: baseline;gap: 30px;">
+                <span class="">Disponível: {{produtos.qtdEstoque}}</span>
+                <span class="">Quantidade: <input name="qtd" type="number" value="0" max="{{produtos.qtdEstoque}}" min="0" step="1"></span>
+            </div>
+            
+            {% if user.is_authenticated %}
+                
+                    <!-- <h3>Estoque atual do produto é : {{produtos.qtdEstoque}}</h3> -->
+                    <input type="submit" class="btn btn-success mt-3 btn-lg" value="Comprar" onclick="comprarProduto()">
+            
+            {% else %}
+                <a href="/login/?next={{request.path}}" class="btn btn-success mt-3 btn-lg">Comprar</a>
+            {% endif %}
+
             </form>
-        {% else %}
-            <a href="/login/?next={{request.path}}" class="btn btn-success">Comprar</a>
-        {% endif %}
+            
+        </div>
  
     </div>
 {% endblock %}
