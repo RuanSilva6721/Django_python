@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Produto(models.Model):
+    
     codProduto = models.AutoField('Código do Produto', primary_key=True)
     descricao = models.CharField('Descrição', max_length=100)
     infProduto = models.TextField('Informações do Produto', blank=True)
