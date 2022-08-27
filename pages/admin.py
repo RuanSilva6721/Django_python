@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Cliente, Venda, Produto, DetalheVenda
-
+from .models import Cliente, Venda, Produto, DetalheVenda, CustomUser
 
 class VendaAdmin(admin.ModelAdmin):
     fields = ['codCliente']
@@ -18,3 +17,4 @@ admin.site.register(Cliente)
 admin.site.register(Venda, VendaAdmin)
 admin.site.register(DetalheVenda, DetalheVendaAdmin)
 admin.site.register(Produto)
+admin.site.register(CustomUser)

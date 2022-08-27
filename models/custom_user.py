@@ -11,3 +11,6 @@ class CustomUser(models.Model):
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    class Meta:
+        app_label = 'pages'
