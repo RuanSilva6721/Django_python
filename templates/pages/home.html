@@ -2,25 +2,24 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-
-
-
-
     <div class="produtos-card">
         <div class="container">
             <div class="row">
-                <a href="{% url 'newUser' %}"> Cadastrar Usuários</a>
                 <div class="col-12">
                     <h2 class="main-title">Produtos</h2>
                     </div>
                     {% for produtos in produto %}
                     <div class="col-md-3">
-                        <div class="card">
-                            <a href="{% url 'produto' name=produtos.descricao cod=produtos.codProduto %}"><img src="{{produtos.imgProduto.url}}" class="card-img-top" alt=""></a>
-                            <div>
-                                <h5 class="card-title" id="nome_do_produto">{{produtos.descricao}}</h5>
-                                <p id="preco_do_produto">{{produtos.valorUnitario}}</p>
-                            </div>
+                        <div class="card" style="width: 18rem">
+                            <a href="{% url 'produto' name=produtos.descricao cod=produtos.codProduto %}">
+                                <div style="width:224px; height:224px; margin: auto">
+                                    <img src="{{produtos.imgProduto.url}}" class="card-img-top img-produto" alt="">
+                                </div>
+                                <div class="card-body">
+                                    <h2 class="card-title nome-produto">{{produtos.descricao}}</h2>
+                                    <p class="card-text preco-produto">R${{produtos.valorUnitario}}</p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     {% endfor %}  
@@ -28,11 +27,9 @@
         </div>
     </div>
 </div>
-
+{% endblock %}
 
       
-
-{% endblock %}
 
 
 

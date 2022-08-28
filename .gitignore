@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+POO_II/__pycache__/
 *.py[cod]
 *$py.class
 testes/
@@ -131,4 +132,3 @@ dmypy.json
 
 
 # Project
-media/

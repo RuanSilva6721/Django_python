@@ -2,29 +2,33 @@
 {% block title %} {{produtos.descricao}} {% endblock %}
 
 {% block content %}
+    <div class="container-compra">
 
-<form action="new/" method="POST">
-    {% csrf_token %}
-<div class="produtos-card">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="col-md-3">
-                    <div class="card-destalhe">
-                        <img src="{{produtos.imgProduto.url}}" class="card-img-top" alt="">
-                        <div>
-                            <h5 class="card-title" id="nome_do_produto">{{produtos.descricao}}</h5>
-                            <p id="preco_do_produto">{{produtos.valorUnitario}}</p>
-                        </div>
-                    </div>
-                </div>
- 
+        <img src="{{produtos.imgProduto.url}}" class="card-img-top info-produto" alt="">   
+                            
+        <div style="width: 600px">
+            <form method="POST" class="compra-descricao">
+                {% csrf_token %}
+            <h1 class="card-title compra-descricao">{{produtos.descricao}}</h1>
+            <h4 class="compra-preco"></p>R${{produtos.valorUnitario}}</h4>
+            <p class="compra-descricao">{{produtos.infProduto}}</p>
+            <div style="display: flex; align-items: baseline;gap: 30px;">
+                <span class="">Disponível: {{produtos.qtdEstoque}}</span>
+                <span class="">Quantidade: <input name="qtd" type="number" value="0" max="{{produtos.qtdEstoque}}" min="0" step="1"></span>
+            </div>
+            
+            {% if user.is_authenticated %}
+                
+                    <!-- <h3>Estoque atual do produto é : {{produtos.qtdEstoque}}</h3> -->
+                    <input type="submit" class="btn btn-success mt-3 btn-lg" value="Comprar" onclick="comprarProduto()">
+            
+            {% else %}
+                <a href="/login/?next={{request.path}}" class="btn btn-success mt-3 btn-lg">Comprar</a>
+            {% endif %}
+
+            </form>
+            
         </div>
+ 
     </div>
-</div>
-</div>
-
-<input type="submit" value="Comprar">
-</form> 
-
 {% endblock %}

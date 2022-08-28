@@ -1,33 +1,84 @@
+from django.contrib import messages
+from pages.models import DetalheVenda, Produto, Cliente, Venda
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
-#from pages.forms import ProdutoForm
-from pages.models import Produto, Cliente, Venda, DetalheVenda
-from .forms import ClienteForm
 
-def home_home(request):
-    produto = Produto.objects.all()
+from utils.util import desacentua
+from django.db.models import Q
+
+
+def home(request):
+    search = request.GET.get('search')
+    if search:
+        search2 = desacentua(search)
+        produto = Produto.objects.filter(Q(descricao__icontains=search) | Q(descricao__icontains=search2) | Q(infProduto__icontains=search))
+    else:
+        produto = Produto.objects.all()
     return render(request, 'pages/home.html', {'produto': produto})
 
 
-def produtoDescrip(request, name, cod):
-    produtos = get_object_or_404 (Produto, pk=cod)
-    return render (request, 'pages/produto.html', {'produtos': produtos} )
+def produto_description(request, name, cod):
+    produtos = get_object_or_404(Produto, pk=cod, descricao=name)
+    if request.method == 'POST' and request.user.is_authenticated:
+        qtd_select = int(request.POST['qtd'])
+        cliente = Cliente.objects.get(user=request.user.id)
+        if produtos.qtdEstoque > 0 and qtd_select <= produtos.qtdEstoque:
+            produtos.qtdEstoque -= qtd_select
+            produtos.save()
+            codVenda = Venda.objects.create(codCliente=cliente).codVenda
             
+            DetalheVenda.objects.create(codDetalheVenda=Venda.objects.get(codVenda=codVenda), codProduto=produtos, qtdProduto=qtd_select)
+        return render (request, 'pages/produto.html', {'produtos': produtos} )
+    else:
+        return render (request, 'pages/produto.html', {'produtos': produtos} )
 
-def salvaDadosProd(request,):
-    # produto = ProdutoForm(request.POST)
-    produto = Produto.objects.all()
+
+def user_login(request):
     if request.method == 'POST':
-
-        #  produto.save()
-         return redirect('')
-
-
-def newUser(request):
+        try:
+            next = request.POST['next']
+        except:
+            next = '/'
+        username = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect(next)
+        else:
+            messages.error(request, 'Usuário ou senha inválidos')
+            return redirect(request.path + '?next=' + next)
+    else:
+        return render(request, 'pages/login.html')
+#
+def cadastrar(request):
     if request.method == 'POST':
-        form = ClienteForm(request.POST)
-        if form.is_valid():
-            form.save()           
-            return redirect('/')
-    else:        
-        form = ClienteForm()
-        return render(request, 'pages/User.html', {'form': form})
+        try:
+            usuario_aux = User.objects.get(email=request.POST['campo-email'])
+            if usuario_aux:
+                return render(request, 'pages/cadastrar.html', {'msg': 'Erro! Já existe um usuário com o mesmo e-mail'})
+
+        except User.DoesNotExist:
+            nome_usuario = str(request.POST['nome']).split(' ')[0].lower()
+            cpf = request.POST['cpf']
+            nome = request.POST['nome']
+            renda = request.POST['renda']
+            classe = request.POST['classe']
+            email = request.POST['campo-email']
+            senha = request.POST['campo-senha']
+
+            novoUsuario = User.objects.create_user(username=nome_usuario, email=email, password=senha)
+            novoUsuario.save()
+            novoCliente = Cliente(user=novoUsuario, cpf=cpf, nomeCliente=nome, renda=renda, classeSocial=classe)
+            novoCliente.save()
+            return render(request, 'pages/cadastrar.html', {'msg': 'Usuário cadastrado com sucesso!'})
+    else:
+        return render(request, 'pages/cadastrar.html')
+
+@login_required(login_url='/login/')
+def user_logout(request):
+    logout(request)
+    messages.success(request, 'Você saiu do sistema.')
+    return redirect('/')
