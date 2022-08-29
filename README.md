@@ -16,6 +16,14 @@
 <li>Framework utilizado: <strong><a href"https://www.djangoproject.com/">Django (3.2.15)</a></strong></li>
 <li>Banco de dados utilizado: <strong><a href"https://www.sqlite.org/index.html"> SQLite </a></strong></li>
 
+## Pré requisitos
+<p align="justify">Além da linguagem listada acima,é necessário um bom editor de códigos como o Vscode</p>
+
+## Funcionalidades
+- [x] Registro de vendas
+- [x] Cadastro de cliente
+- [X] Cadastro de produtos
+
 ## 🔃 Rodando o projeto
 
 1 - Clone o repositório: [trabalho_POOII](https://github.com/RuanSilva6721/trabalho_POOII)  
