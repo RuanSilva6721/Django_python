@@ -1,15 +1,20 @@
+from os import remove
 from django.contrib import messages
 from pages.models import DetalheVenda, Produto, Cliente, Venda
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
-
+from django.contrib.auth.hashers import  check_password
+from django.views import  View
 from utils.util import desacentua
 from django.db.models import Q
 
 
 def home(request):
+    cart = request.session.get('cart')
+    if not cart:
+        request.session['cart'] = {}
     search = request.GET.get('search')
     if search:
         search2 = desacentua(search)
@@ -22,15 +27,23 @@ def home(request):
 def produto_description(request, name, cod):
     produtos = get_object_or_404(Produto, pk=cod, descricao=name)
     if request.method == 'POST' and request.user.is_authenticated:
-        qtd_select = int(request.POST['qtd'])
-        cliente = Cliente.objects.get(user=request.user.id)
-        if produtos.qtdEstoque > 0 and qtd_select <= produtos.qtdEstoque:
-            produtos.qtdEstoque -= qtd_select
-            produtos.save()
-            codVenda = Venda.objects.create(codCliente=cliente).codVenda
-            
-            DetalheVenda.objects.create(codDetalheVenda=Venda.objects.get(codVenda=codVenda), codProduto=produtos, qtdProduto=qtd_select)
-        return render (request, 'pages/produto.html', {'produtos': produtos} )
+        qtd_select = int(request.POST.get('qtd'))
+        print(qtd_select)
+        cart = request.session.get('cart')
+        if cart:
+            if qtd_select:
+                cart[cod] = qtd_select
+            else:
+                cart[cod] = 1
+        else:
+            cart = {}
+            if qtd_select:
+                cart[cod] = qtd_select
+            else:
+                cart[cod] = 1
+
+        request.session['cart'] = cart
+        return redirect('carrinho')
     else:
         return render (request, 'pages/produto.html', {'produtos': produtos} )
 
@@ -77,8 +90,72 @@ def cadastrar(request):
     else:
         return render(request, 'pages/cadastrar.html')
 
+
 @login_required(login_url='/login/')
 def user_logout(request):
     logout(request)
     messages.success(request, 'Você saiu do sistema.')
     return redirect('/')
+
+
+
+
+class Cart(View):
+    def get(self, request):
+        ids = list(request.session.get('cart').keys())
+        if ids:
+            produtos = Produto.objects.filter(pk__in=ids)
+            return render(request , 'pages/carrinho.html' , {'produtos': produtos} )
+        else:
+            return render(request , 'pages/carrinho.html')
+    
+    def post(self, request):
+        pk = request.POST.get('produto')
+        remove = request.POST.get('remove')
+        cart = request.session.get('cart')
+        if cart:
+            quantity = cart.get(pk)
+            if quantity:
+                if remove:
+                    if quantity <= 1:
+                        cart.pop(pk)
+                    else:
+                        cart[pk] = quantity - 1
+                else:
+                    produto = Produto.objects.get(pk=pk)
+                    if produto.qtdEstoque > 0 and produto.qtdEstoque > quantity:
+                        cart[pk] = quantity + 1
+            else:
+                cart[pk] = 1
+        else:
+            cart = {}
+            cart[pk] = 1
+
+        request.session['cart'] = cart
+        return redirect('/carrinho')
+
+def finalizar_compra(request):
+    cliente = Cliente.objects.get(user=request.user.id)
+    cart = request.session.get('cart')
+    if cart:
+        cod_venda = Venda.objects.create(codCliente=cliente).codVenda
+        for key, value in cart.items():
+            produto = Produto.objects.get(pk=key)
+            produto.qtdEstoque -= value
+            produto.save()
+            detalhe = DetalheVenda(codDetalheVenda=Venda.objects.get(codVenda=cod_venda), codProduto=produto, qtdProduto=value)
+            detalhe.save()
+            cart.pop(key)
+            request.session['cart'] = cart
+            return redirect('/')
+    return redirect('/')
+
+
+
+    # cliente = Cliente.objects.get(user=request.user.id)
+    # if produtos.qtdEstoque > 0 and qtd_select <= produtos.qtdEstoque:
+    #     produtos.qtdEstoque -= qtd_select
+    #     produtos.save()
+    #     codVenda = Venda.objects.create(codCliente=cliente).codVenda
+    #     DetalheVenda.objects.create(codDetalheVenda=Venda.objects.get(codVenda=codVenda), codProduto=produtos, qtdProduto=qtd_select)
+    

@@ -17,3 +17,11 @@ class Produto(models.Model):
     
     class Meta:
         app_label = 'pages'
+
+    @staticmethod
+    def get_products_by_id(ids):
+        return Produto.objects.filter(codProduto__in=ids)
+        
+    @staticmethod
+    def get_all_products():
+        return Produto.objects.all()
