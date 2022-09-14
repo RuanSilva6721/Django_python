@@ -8,7 +8,7 @@
                             
         <div style="width: 600px">
             <form method="POST" class="compra-descricao">
-                {% csrf_token %}
+            {% csrf_token %}
             <h1 class="card-title compra-descricao">{{produtos.descricao}}</h1>
             <h4 class="compra-preco"></p>R${{produtos.valorUnitario}}</h4>
             <p class="compra-descricao">{{produtos.infProduto}}</p>
@@ -18,9 +18,7 @@
             </div>
             
             {% if user.is_authenticated %}
-                
-                    <!-- <h3>Estoque atual do produto é : {{produtos.qtdEstoque}}</h3> -->
-                    <input type="submit" class="btn btn-success mt-3 btn-lg" value="Comprar" onclick="comprarProduto()">
+                <input type="submit" class="btn btn-success mt-3 btn-lg" id="cart" value="Comprar" name="addcart"></input>
             
             {% else %}
                 <a href="/login/?next={{request.path}}" class="btn btn-success mt-3 btn-lg">Comprar</a>

@@ -1,11 +1,13 @@
 from django.urls import path
-from . import views
+from views import cart, home, product, login, signup, logout, purchase
 
 
 urlpatterns = [
-    path('', views.home, name="home"),
-    path('produto/<str:name>/<int:cod>', views.produto_description, name="produto"),
-    path('login/', views.user_login, name="login"),
-    path('cadastrar/', views.cadastrar, name="cadastrar"),
-    path('logout/', views.user_logout, name="logout"),
+    path('', home.index, name="home"),
+    path('produto/<str:name>/<int:cod>', product.produto_description, name="produto"),
+    path('login/', login.user_login, name="login"),
+    path('cadastrar/', signup.cadastrar, name="cadastrar"),
+    path('logout/', logout.user_logout, name="logout"),
+    path('carrinho/', cart.Cart.as_view(), name="carrinho"),
+    path('compra/', purchase.finalizar_compra, name="compra"),
 ]
